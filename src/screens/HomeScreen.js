@@ -15,8 +15,9 @@ import { windowHeight } from '../components/BottomNav'
 const HomeScreen = ({ navigation }) => {
 
     const [foodData, setFoodData] = useState([]);
-    const [VegData, setVegData] = useState([]);
-    const [NonVegData, setNonVegData] = useState([]);
+    const [teaData, setTeaData] = useState([]);
+    const [coffeeData, setCoffeeData] = useState([]);
+    const [toppingData, setToppingData] = useState([]);
 
 
     const foodRef = firebase.firestore().collection('FoodData');
@@ -29,8 +30,9 @@ const HomeScreen = ({ navigation }) => {
     }, [])
 
     useEffect(() => {
-        setVegData(foodData.filter((item) => item.foodType == 'veg'))
-        setNonVegData(foodData.filter((item) => item.foodType == 'non-veg'))
+        setTeaData(foodData.filter((item) => item.foodType == 'Trà'))
+        setCoffeeData(foodData.filter((item) => item.foodType == 'Coffee'))
+        setToppingData(foodData.filter((item) => item.foodType == 'Topping'))
     }, [foodData])
     // console.log(foodData)
     // console.log(VegData)
@@ -65,7 +67,8 @@ const HomeScreen = ({ navigation }) => {
                     }} />
 
                 </View>
-                {search != '' && <View style={styles.seacrhresultsouter}>
+                {search != '' && //<View style={styles.seacrhresultsouter}>
+                    <ScrollView horizontal={true} style={{ width: "100%" }}>
                     <FlatList style={styles.searchresultsinner} data={foodData} renderItem={
                         ({ item }) => {
                             if (item.foodName.toLowerCase().includes(search.toLowerCase())) {
@@ -78,14 +81,16 @@ const HomeScreen = ({ navigation }) => {
                             }
                         }
                     } />
-                </View>}
+                {/* </View>} */}
+                </ScrollView>}
                 <Categories />
                 <OfferSlider />
                 {/* <Text>HomeScreen</Text> */}
 
                 <Cardslider title={"Đặc biệt"} data={foodData} navigation={navigation} />
-                <Cardslider title={"Non-Veg"} data={NonVegData} navigation={navigation} />
-                <Cardslider title={"Veg"} data={VegData} navigation={navigation} />
+                <Cardslider title={"Coffee"} data={coffeeData} navigation={navigation} />
+                <Cardslider title={"Trà"} data={teaData} navigation={navigation} />
+                <Cardslider title={"Topping"} data={toppingData} navigation={navigation} />
                 <Text> </Text>
                 <Text> </Text>
                 </ImageBackground>

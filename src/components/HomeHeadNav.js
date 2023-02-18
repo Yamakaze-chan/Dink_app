@@ -9,6 +9,7 @@ import { colors } from '../globals/style';
 const HomeHeadNav = ({ navigation }) => {
     return (
         <View style={styles.container}>
+            {/** */}
             <Fontisto name="nav-icon-list-a" size={20} color="black" style={styles.myicon} />
             <View style={styles.containerin}>
                 
@@ -19,7 +20,7 @@ const HomeHeadNav = ({ navigation }) => {
                 */}
             </View>
             <TouchableOpacity onPress={() => { navigation.navigate('userprofile') }}>
-                <FontAwesome5 name="user-circle" size={26} color="black" style={styles.myicon} />
+                <FontAwesome5 name="user-circle" size={26} color="black" style={{color: colors.cafe_title}} />
             </TouchableOpacity>
         </View>
     )
@@ -44,7 +45,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     myicon: {
-        color: colors.text1,
+        //color: colors.text1,
+        color: '#FFFFFF'
     },
     mytext: {
         color: colors.cafe_title,

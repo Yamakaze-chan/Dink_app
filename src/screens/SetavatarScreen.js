@@ -87,12 +87,11 @@ const SetAvatarScreen = ({ navigation }) => {
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
             id_of_UserData = doc.id;
-            console.log(doc.id, " => ", doc.data());
+            //console.log(doc.id, " => ", doc.data());
           });
 
         getDownloadURL(ref(storage, `UserImages/${filename}`)).then((url)=>{
-            console.log("URL:  ", url);
-            console.log(userloggeduid);
+            //console.log("URL:  ", url);
         updateDoc(doc(db,`UserData/${id_of_UserData}`),{userImgUrl: url})
         //console.log("Data added successfully ", updateimgref.id);
         })

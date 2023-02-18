@@ -13,19 +13,11 @@ import Productpage from './src/screens/Productpage';
 import UserCart from './src/screens/UserCart';
 import Placeorder from './src/screens/Placeorder';
 import TrackOrders from './src/screens/TrackOrders';
-import CheckConnection from './CheckConnection';
-import NoConnection from './src/screens/NoConnectionScreen';
 import {useNetInfo} from "@react-native-community/netinfo";
 import SetAvatarScreen from './src/screens/SetavatarScreen'
 
 export default function App() {
   const Stack = createNativeStackNavigator();
-  const netInfo = useNetInfo();
-  const access = netInfo.isConnected && netInfo.isInternetReachable;
-  const [connectStatus, setconnectStatus] = useState(access)
-  CheckConnection().then(res =>{
-    setconnectStatus(false)
-  })
   //if(!access)
   //{
   //  alert("No internet connection");

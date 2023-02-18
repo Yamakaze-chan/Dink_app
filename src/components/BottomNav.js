@@ -59,10 +59,11 @@ const styles = StyleSheet.create({
     },
     icon2: {
         color: 'white',
+        
 
     },
     icon1: {
-        color: colors.text1,
-
+        //color: colors.text1,
+        color: colors.cafe_title,
     }
 })
