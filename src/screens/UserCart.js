@@ -100,13 +100,13 @@ const UserCart = ({ navigation }) => {
                 <BottomNav navigation={navigation} />
             </View>
             <View style={styles.container}>
-                <Text style={styles.head1}>Your Cart</Text>
+                <Text style={styles.head1}>Đơn của bạn</Text>
                 <View style={styles.cartout}>
                     {cartdata == null || JSON.parse(cartdata).cart.length == 0 ?
-                        <Text style={styles.head2}>Your Cart is Empty</Text>
+                        <Text style={styles.head2}>Bạn chưa thêm nước vào đơn</Text>
                         :
-                        <View>
-                        <ScrollView horizontal={true} style={{ width: "100%" }}>
+
+                        <ScrollView horizontal={true} style={{ width: "100%", borderColor: 'black', borderWidth:1 }}>
                         <FlatList style={styles.cardlist} data={JSON.parse(cartdata).cart} renderItem={
                             ({ item }) => {
                                 return (
@@ -116,7 +116,7 @@ const UserCart = ({ navigation }) => {
                                             <View style={styles.cartcardin}>
                                                 <View style={styles.c1}>
                                                     <Text style={styles.txt1}>{item.Foodquantity}&nbsp;{item.data.foodName}</Text>
-                                                    <Text style={styles.txt2}>{formatcurr(item.data.foodPrice)} đ/each</Text>
+                                                    <Text style={styles.txt2}>{formatcurr(item.data.foodPrice)} đ/ly</Text>
                                                 </View>
                                                 
                                             </View>
@@ -130,8 +130,7 @@ const UserCart = ({ navigation }) => {
                                 )
                             }
                         } />
-                        </ScrollView>
-                        </View>}
+                        </ScrollView>}
                         
                 </View>
                 <View style={styles.btncont}>
@@ -140,7 +139,7 @@ const UserCart = ({ navigation }) => {
                         <Text style={styles.txt6}>{formatcurr(totalCost)} đ</Text>
                     </View>
                     <TouchableOpacity style={btn2}>
-                        <Text style={styles.btntxt} onPress={() => placeorderofcart()}>Place Order</Text>
+                        <Text style={styles.btntxt} onPress={() => placeorderofcart()}>Đặt</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -191,29 +190,32 @@ const styles = StyleSheet.create({
         backgroundColor: colors.col1,
         marginVertical: 5,
         borderRadius: 10,
-        width: '95%',
+        width: '100%',
         height: 150,
         alignSelf: 'center',
         elevation: 10,
         alignItems: 'center',
+        borderColor: 'black', borderWidth:1
     },
     cartimg: {
-        width: 150,
-        height: 150,
+        width: 140,
+        height: 140,
         borderRadius: 10,
         resizeMode: 'center',
     },
     cartcardin: {
         flexDirection: 'row',
         margin: 5,
-        width: '58%',
+        width: '75%',
         alignItems: 'center',
         justifyContent: 'center',
         // backgroundColor: colors.text1,
 
     },
     cardlist: {
-        width: '100%',
+        //flex:1,
+        width: 358,
+        //borderColor: 'black', borderWidth:1
     },
     cartout: {
         flex: 1,

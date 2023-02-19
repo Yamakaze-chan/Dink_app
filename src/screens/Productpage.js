@@ -20,7 +20,7 @@ const Productpage = ({ navigation, route }) => {
     const addTocart = () => {
         const docRef = firebase.firestore().collection('UserCart').doc(firebase.auth().currentUser.uid);
 
-        const data1 = { data, Addonquantity: addonquantity, Foodquantity: quantity }
+        const data1 = { data, Foodquantity: quantity }
         console.log(data1);
 
         docRef.get().then((doc) => {
@@ -35,7 +35,7 @@ const Productpage = ({ navigation, route }) => {
                 })
                 console.log('Added')
             }
-            alert('Added to cart')
+            alert('Đã thêm vào đơn')
         })
 
     }
@@ -58,9 +58,12 @@ const Productpage = ({ navigation, route }) => {
         }
     }
 
-    const cartdata = JSON.stringify({ cart: [{ Addonquantity: addonquantity, Foodquantity: quantity, data }] });
+    const cartdata = JSON.stringify({ cart: [{ data }] });
     // console.log(typeof (cartdata))
     // console.log(cartdata)
+    const formatcurr = (n) => {
+        return String(parseInt(n).toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).slice(0, -2);
+      }
 
     return (
         <ScrollView style={styles.container}>
@@ -81,20 +84,20 @@ const Productpage = ({ navigation, route }) => {
                 <View style={styles.s2}>
                     <View style={styles.s2in}>
                         <Text style={styles.head1}>{data.foodName}</Text>
-                        <Text style={styles.head2}>{data.foodPrice} đ</Text>
+                        <Text style={styles.head2}>{formatcurr(data.foodPrice)} đ</Text>
                     </View>
                     <View style={styles.s3}>
-                        <Text style={styles.head3}>About Food</Text>
+                        <Text style={styles.head3}>Giới thiệu</Text>
                         <Text style={styles.head4}>{data.foodDescription}</Text>
+                        {/** 
                         <View style={styles.s3in}>
                             {data.foodType == 'veg' ? <Text style={veg}></Text> : <Text style={nonveg}></Text>}
                             <Text style={styles.head5}>{data.foodType}</Text>
                         </View>
+                        */}
                     </View>
 
-
-
-
+                    {/** 
                     <View style={styles.container2}>
                         <Text style={styles.txt1}>Location</Text>
                         <Text style={styles.txt2}>{data.restaurantName}</Text>
@@ -106,7 +109,8 @@ const Productpage = ({ navigation, route }) => {
                             <Text style={styles.txt3}>{data.restrauntAddressCity}</Text>
                         </View>
                     </View>
-
+                    */}
+                    {/**
                     {data.foodAddonPrice && <View style={styles.container3}>
                         <View style={hr80}></View>
 
@@ -125,12 +129,11 @@ const Productpage = ({ navigation, route }) => {
                         </View>
                         {/* <View style={hr80}></View> */}
 
-                    </View>}
 
                     <View style={styles.container3}>
                         <View style={hr80}></View>
 
-                        <Text style={styles.txt3}>Food Quantity</Text>
+                        <Text style={styles.txt3}>Số lượng</Text>
                         <View style={incdecout}>
 
                             <Text onPress={() => increaseQuantity()} style={incdecbtn}>+</Text>
@@ -146,18 +149,9 @@ const Productpage = ({ navigation, route }) => {
 
                         <View style={styles.c4in}>
                             <Text style={styles.txt2}>Total Price</Text>
-                            {data.foodAddonPrice ?
                                 <Text style={styles.txt3}>{
-                                    ((parseInt(data.foodPrice) * parseInt(quantity))
-                                        + parseInt(addonquantity) * parseInt(data.foodAddonPrice)).toString()
-
+                                    formatcurr((parseInt(data.foodPrice) * parseInt(quantity))).toString()
                                 } đ</Text>
-
-                                :
-                                <Text style={styles.txt3}>{
-                                    ((parseInt(data.foodPrice) * parseInt(quantity))).toString()
-                                } đ</Text>
-                            }
                         </View>
 
                         <View style={hr80}></View>
@@ -165,11 +159,13 @@ const Productpage = ({ navigation, route }) => {
 
                     <View style={styles.btncont}>
                         <TouchableOpacity style={btn2} onPress={() => { addTocart() }}>
-                            <Text style={styles.btntxt}>Add to Cart</Text>
+                            <Text style={styles.btntxt}>Thêm vào đơn</Text>
                         </TouchableOpacity>
+                        {/** 
                         <TouchableOpacity style={btn2}>
                             <Text style={styles.btntxt} onPress={() => navigation.navigate('placeorder', { cartdata })}>Buy Now</Text>
                         </TouchableOpacity>
+                        */}
                     </View>
                 </View>
             </View>
