@@ -4,8 +4,9 @@ import { colors } from '../globals/style'
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
+import Cardslider from './Cardslider'
 
-const Categories = () => {
+const Categories = ({ref, navigation}) => {
     return (
         <View style={styles.container}>
             <Text style={styles.head}>Categories</Text>
@@ -13,22 +14,22 @@ const Categories = () => {
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                 <View style={styles.box}>
                     <MaterialCommunityIcons name="coffee" size={24} color="black" style={styles.myicon} />
-                    <Text style={styles.mytext}>Coffee</Text>
+                    <Text style={styles.mytext}>Cà phê</Text>
                 </View>
 
                 <View style={styles.box}>
                     <MaterialCommunityIcons name="tea" size={24} color="black" style={styles.myicon} />
-                    <Text style={styles.mytext}>Tea</Text>
+                    <Text style={styles.mytext}>Trà</Text>
                 </View>
 
                 <View style={styles.box}>
                     <MaterialCommunityIcons name="cup" size={24} color="black" style={styles.myicon} />
-                    <Text style={styles.mytext}>Other drink</Text>
+                    <Text style={styles.mytext}>Các thức uống khác</Text>
                 </View>
 
                 <View style={styles.box}>
                     <MaterialCommunityIcons name="cupcake" size={24} color="black" style={styles.myicon} />
-                    <Text style={styles.mytext}>Deserts</Text>
+                    <Text style={styles.mytext}>Đồ ăn</Text>
                 </View>
             </ScrollView>
         </View>

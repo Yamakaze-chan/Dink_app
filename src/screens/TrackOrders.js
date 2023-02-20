@@ -25,9 +25,9 @@ const TrackOrders = ({ navigation }) => {
 
     const convertDate = (date) => {
         // console.log(date.seconds)
-        const newdate = new Date(date.seconds * 1000)
-        // console.log(newdate)
-        return newdate.toDateString()
+        const newdate = new Date(date.seconds * 1000).toISOString().slice(0, 10).split('-').reverse().join('/');
+        //console.log(newdate)
+        return newdate
     }
 
 
@@ -52,7 +52,7 @@ const TrackOrders = ({ navigation }) => {
 
 
             <ScrollView style={styles.containerin} nestedScrollEnabled={true}>
-                <Text style={styles.head1}>Track Orders</Text>
+                <Text style={styles.head1}>Lịch sử</Text>
                 <View>
                     {orders.sort(
                         (a, b) => b.orderdate.seconds - a.orderdate.seconds
@@ -60,14 +60,13 @@ const TrackOrders = ({ navigation }) => {
                         return (
                             <View style={styles.order} key={index}>
                                 <Text style={styles.orderindex}>{index + 1}</Text>
-                                <Text style={styles.ordertxt2}>order id : {order.orderid}</Text>
-                                <Text style={styles.ordertxt2}>order date : {convertDate(order.orderdate)}</Text>
-                                {order.orderstatus == 'ontheway' && <Text style={styles.orderotw}>Your order is on the way </Text>}
-                                {order.orderstatus == 'delivered' && <Text style={styles.orderdelivered}>Your order is delivered </Text>}
-                                {order.orderstatus == 'cancelled' && <Text style={styles.ordercancelled}>Your order is cancelled </Text>}
-                                {order.orderstatus == 'pending' && <Text style={styles.orderpending}>Your order is pending </Text>}
+                                <Text style={styles.ordertxt2}>Mã đơn : {order.orderid}</Text>
+                                <Text style={styles.ordertxt2}>Ngày đặt đơn : {convertDate(order.orderdate)}</Text>
+                                {order.orderstatus == 'delivered' && <Text style={styles.orderdelivered}>Đơn đã hoàn thành </Text>}
+                                {order.orderstatus == 'cancelled' && <Text style={styles.ordercancelled}>Đơn của bạn đã bị hủy </Text>}
+                                {order.orderstatus == 'pending' && <Text style={styles.orderpending}>Đơn của bạn đang trong hàng chờ </Text>}
 
-
+                                {/** 
                                 <View style={styles.row1}>
                                     <Text style={styles.ordertxt1}>Delivery Agent name & contact</Text>
                                     {
@@ -77,6 +76,7 @@ const TrackOrders = ({ navigation }) => {
                                         order.deliveryboy_phone ? <Text style={styles.ordertxt2}>{order.deliveryboy_phone}</Text> : null
                                     }
                                 </View>
+                                */}
 
                                 <View>
                                 <ScrollView horizontal={true} style={{ width: "100%" }}>
@@ -88,7 +88,6 @@ const TrackOrders = ({ navigation }) => {
                                                     <View style={styles.left}>
                                                         <Text style={styles.qty}>{item.Foodquantity}</Text>
                                                         <Text style={styles.title}>{item.data.foodName}</Text>
-                                                        <Text style={styles.price1}>{item.data.foodPrice} đ</Text>
                                                     </View>
                                                     <View style={styles.right}>
                                                         <Text style={styles.totalprice}>{formatcurr(parseInt(item.Foodquantity) * parseInt(item.data.foodPrice), 'VND')} đ</Text>
@@ -112,17 +111,17 @@ const TrackOrders = ({ navigation }) => {
                                 } />
                                 </ScrollView>
                                 </View>
-                                <Text style={styles.total}>Total: {formatcurr(parseInt(order.ordercost))} đ</Text>
+                                <Text style={styles.total}>Tổng cộng: {formatcurr(parseInt(order.ordercost))} đ</Text>
                                 {
-                                    order.orderstatus === 'Delivered' ? <Text style={styles.ordertxt3}>Thank you for ordering with us</Text> : null
+                                    order.orderstatus === 'Delivered' ? <Text style={styles.ordertxt3}>Cảm ơn vì đã chọn chúng tôi</Text> : null
                                 }
                                 {
-                                    order.orderstatus === 'cancelled' ? <Text style={styles.ordertxt3}>Sorry for the inconvenience</Text> : null
+                                    order.orderstatus === 'cancelled' ? <Text style={styles.ordertxt3}>Thành thực rất xin lỗi vì sự bất tiện</Text> : null
                                 }
                                 {
                                     order.orderstatus != 'cancelled' && order.orderstatus != 'delivered' ?
                                         <TouchableOpacity style={styles.cancelbtn} onPress={() => cancelOrder(order)}>
-                                            <Text style={styles.cencelbtnin}>Cancel Order</Text>
+                                            <Text style={styles.cencelbtnin}>Hủy đơn</Text>
                                         </TouchableOpacity>
                                         : null
                                 }
@@ -175,6 +174,7 @@ const styles = StyleSheet.create({
         marginVertical: 20,
     },
     row: {
+        width:280,
         flexDirection: 'row',
         alignItems: 'center',
         marginVertical: 5,
@@ -201,6 +201,7 @@ const styles = StyleSheet.create({
     left: {
         flexDirection: 'row',
         alignItems: 'center',
+        width:'70%',
     },
     right: {
         flexDirection: 'row',
@@ -235,6 +236,7 @@ const styles = StyleSheet.create({
         textAlign: 'right',
         marginVertical: 10,
         marginRight: 20,
+        fontWeight: '500',
     },
     order: {
         margin: 10,
@@ -252,8 +254,9 @@ const styles = StyleSheet.create({
 
     },
     ordertxt2: {
+        color: colors.cafe_title,
         fontSize: 17,
-        color: colors.text3,
+        //color: colors.text3,
         textAlign: 'center',
         marginVertical: 5,
         fontWeight: 'bold',

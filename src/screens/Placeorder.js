@@ -82,18 +82,6 @@ const Placeorder = ({ navigation, route }) => {
     
 
     const placenow = () => {
-        if(userdata.address=="")
-        {
-            Alert.alert('Missing Address', 'Please add your address', [
-                {
-                  text: 'Add address',
-                  onPress: () => navigation.navigate('userprofile'),
-                },
-                {text: 'Later'},
-              ])
-        }
-        else
-        {
             const docRef = firebase.firestore().collection('UserOrders').doc(new Date().getTime().toString());
             docRef.set({
                 orderid: docRef.id,
@@ -109,15 +97,17 @@ const Placeorder = ({ navigation, route }) => {
                 paymenttotal: totalCost
             })
             
-            alert('Order Placed Successfully');
+            Alert.alert('Đặt thành công','Vui lòng có mặt trong vòng 1 giờ');
             // navigation.navigate('trackorders');
             JSON.parse(cartdata).cart.forEach(element => {
                 deleteItem(element)
             });
             navigation.navigate('home');
-            
-        }
     }
+
+    const formatcurr = (n) => {
+        return String(parseInt(n).toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).slice(0, -2);
+      }
 
     return (
         <ScrollView style={styles.containerout}>
@@ -128,7 +118,7 @@ const Placeorder = ({ navigation, route }) => {
             </TouchableOpacity>
             <View style={styles.container}>
 
-                <Text style={styles.head1}>Your Order Summary</Text>
+                <Text style={styles.head1}>Xác nhận đơn hàng</Text>
                 
                 <ScrollView horizontal={true} style={{ width: "100%" }}>
                 <FlatList style={styles.c1} data={orderdata.cart} renderItem={
@@ -139,13 +129,13 @@ const Placeorder = ({ navigation, route }) => {
                                     <View style={styles.left}>
                                         <Text style={styles.qty}>{item.Foodquantity}</Text>
                                         <Text style={styles.title}>{item.data.foodName}</Text>
-                                        <Text style={styles.price1}>{item.data.foodPrice} đ</Text>
+                                        <Text style={styles.price1}>{formatcurr(item.data.foodPrice)} đ</Text>
                                     </View>
                                     <View style={styles.right}>
-                                        <Text style={styles.totalprice}>{parseInt(item.Foodquantity) * parseInt(item.data.foodPrice)} đ</Text>
+                                        <Text style={styles.totalprice}>{formatcurr(parseInt(item.Foodquantity) * parseInt(item.data.foodPrice))} đ</Text>
                                     </View>
                                 </View>
-
+                                {/** 
                                 <View style={styles.row}>
                                     <View style={styles.left}>
                                         <Text style={styles.qty}>{item.Addonquantity}</Text>
@@ -156,6 +146,7 @@ const Placeorder = ({ navigation, route }) => {
                                         <Text style={styles.totalprice}>{parseInt(item.Addonquantity) * parseInt(item.data.foodAddonPrice)} đ</Text>
                                     </View>
                                 </View>
+                                */}
                             </View>
                         )
                     }
@@ -167,10 +158,10 @@ const Placeorder = ({ navigation, route }) => {
                 </View>
                 <View style={styles.row}>
                     <View style={styles.left}>
-                        <Text style={styles.title}>Order Total :</Text>
+                        <Text style={styles.title}>Tổng đơn:</Text>
                     </View>
                     <View style={styles.left}>
-                        <Text style={styles.totalprice}>{totalCost} đ</Text>
+                        <Text style={styles.totalprice}>{formatcurr(totalCost)} đ</Text>
                     </View>
                 </View>
 
@@ -178,10 +169,10 @@ const Placeorder = ({ navigation, route }) => {
                 </View>
 
                 <View style={styles.userdataout}>
-                    <Text style={styles.head1}>Your Details</Text>
+                    <Text style={styles.head1}>Thông tin của bạn</Text>
                     <View style={styles.row}>
                         <View style={styles.left}>
-                            <Text style={styles.title}>Name :</Text>
+                            <Text style={styles.title}>Tên :</Text>
                         </View>
                         <View style={styles.right}>
                             <Text style={styles.title}>{userdata?.name}</Text>
@@ -198,14 +189,14 @@ const Placeorder = ({ navigation, route }) => {
 
                     <View style={styles.row}>
                         <View style={styles.left}>
-                            <Text style={styles.title}>Phone :</Text>
+                            <Text style={styles.title}>Số điện thoại :</Text>
                         </View>
 
                         <View style={styles.right}>
                             <Text style={styles.title}>{userdata?.phone}</Text>
                         </View>
                     </View>
-
+                    {/** 
                     <View style={styles.row}>
                         <View style={styles.left}>
                             <Text style={styles.title}>Address :</Text>
@@ -214,13 +205,14 @@ const Placeorder = ({ navigation, route }) => {
                             <Text style={styles.title}>{userdata?.address}</Text>
                         </View>
                     </View>
+                    */}
                 </View>
 
                 <View style={hr80}></View>
 
                 <View >
                     <TouchableOpacity style={btn1}>
-                        <Text style={styles.btntext} onPress={() => placenow()}>Proceed to Payment</Text>
+                        <Text style={styles.btntext} onPress={() => placenow()}>Xác nhận</Text>
                     </TouchableOpacity>
                 </View>
             </View>

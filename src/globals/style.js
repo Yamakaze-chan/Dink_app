@@ -27,7 +27,8 @@ module.exports = {
     btn2: {
         width: '70%',
         height: 50,
-        backgroundColor: 'red',
+        //backgroundColor: 'red',
+        backgroundColor: 'rgb(103, 62, 73)',
         borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
@@ -55,7 +56,8 @@ module.exports = {
         backgroundColor: 'red',
     },
     navbtn: {
-        backgroundColor: 'red',
+        //backgroundColor: 'red',
+        backgroundColor: 'rgb(103, 62, 73)',
         width: 50,
         height: 50,
         alignItems: 'center',

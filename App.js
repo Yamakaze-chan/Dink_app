@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
+
 import React, {useState} from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -13,7 +14,6 @@ import Productpage from './src/screens/Productpage';
 import UserCart from './src/screens/UserCart';
 import Placeorder from './src/screens/Placeorder';
 import TrackOrders from './src/screens/TrackOrders';
-import {useNetInfo} from "@react-native-community/netinfo";
 import SetAvatarScreen from './src/screens/SetavatarScreen'
 
 export default function App() {

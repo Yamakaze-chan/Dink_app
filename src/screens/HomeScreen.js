@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, StatusBar, TextInput, FlatList, Image, ScrollView, Dimensions, ImageBackground } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import HomeHeadNav from '../components/HomeHeadNav'
 import Categories from '../components/Categories'
 import OfferSlider from '../components/OfferSlider'
@@ -13,6 +13,7 @@ import { windowHeight } from '../components/BottomNav'
 
 
 const HomeScreen = ({ navigation }) => {
+    const reff = useRef(null);
 
     const [foodData, setFoodData] = useState([]);
     const [teaData, setTeaData] = useState([]);
@@ -57,12 +58,13 @@ const HomeScreen = ({ navigation }) => {
 
             
             <ScrollView>
-            <ImageBackground source={require('../../assets/487498cf-8055-4faa-b835-710d05601f53.png')} resizeMode="cover" style={styles.image}>
+                
+            <ImageBackground source={require('../../assets/950x350-meat-brown-solid-color-background.jpg')} resizeMode="repeat" style={styles.image}>
                 <View style={styles.searchbox}>
                     <AntDesign name="search1" size={24} color="black" style={
                         styles.searchicon
                     } />
-                    <TextInput style={styles.input} placeholder="Search" onChangeText={(e) => {
+                    <TextInput style={styles.input} placeholder="Tìm kiếm" onChangeText={(e) => {
                         setSearch(e)
                     }} />
 
@@ -83,14 +85,14 @@ const HomeScreen = ({ navigation }) => {
                     } />
                 {/* </View>} */}
                 </ScrollView>}
-                <Categories />
+                <Categories ref = {reff.current} />
                 <OfferSlider />
                 {/* <Text>HomeScreen</Text> */}
 
                 <Cardslider title={"Đặc biệt"} data={foodData} navigation={navigation} />
-                <Cardslider title={"Coffee"} data={coffeeData} navigation={navigation} />
+                <Cardslider title={"Cà phê"} data={coffeeData} navigation={navigation} />
                 <Cardslider title={"Trà"} data={teaData} navigation={navigation} />
-                <Cardslider title={"Topping"} data={toppingData} navigation={navigation} />
+                <Cardslider title={"Các thức uống khác"} data={toppingData} navigation={navigation} />
                 <Text> </Text>
                 <Text> </Text>
                 </ImageBackground>
@@ -106,7 +108,7 @@ const styles = StyleSheet.create({
     container: {
         // marginTop: 50,
         flex: 1,
-        backgroundColor: colors.col1,
+        backgroundColor: '#E5B73B',
         
         // alignItems: 'center',
         width: '100%',

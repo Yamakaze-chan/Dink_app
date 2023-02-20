@@ -80,7 +80,6 @@ const TrackOrders = ({ navigation }) => {
                                                     <View style={styles.left}>
                                                         <Text style={styles.qty}>{item.Foodquantity}</Text>
                                                         <Text style={styles.title}>{item.data.foodName}</Text>
-                                                        <Text style={styles.price1}>{item.data.foodPrice} đ</Text>
                                                     </View>
                                                     <View style={styles.right}>
                                                         <Text style={styles.totalprice}>{parseInt(item.Foodquantity) * parseInt(item.data.foodPrice)} đ</Text>

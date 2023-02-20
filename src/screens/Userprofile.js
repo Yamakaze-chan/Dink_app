@@ -60,34 +60,42 @@ const Userprofile = ({ navigation }) => {
 
     const [edit, setEdit] = useState(false);
     const [newname, setNewName] = useState('');
-    const [newaddress, setNewAddress] = useState('');
+    const [newphone, setPhoneedit] = useState('');
 
 
     const updateuser = async () => {
-        const docRef = firebase.firestore().collection('UserData').where('uid', '==', userloggeduid)
-        const doc = await docRef.get();
-        if (!doc.empty) {
-            if (newname !== '') {
-                doc.forEach((doc) => {
-                    doc.ref.update({
-                        name: newname
+        if(newphone.length  != 10 && newphone.length != 0)
+                {
+                    Alert.alert('', 'Số điện thoại phải gồm 10 ký tự')
+                }
+        else
+        {
+            const docRef = firebase.firestore().collection('UserData').where('uid', '==', userloggeduid)
+            const doc = await docRef.get();
+            if (!doc.empty) {
+                if (newname.length != 0) {
+                    doc.forEach((doc) => {
+                        doc.ref.update({
+                            name: newname
+                        })
                     })
-                })
+                }
+                if (newphone.length != 0) {
+                    
+                        doc.forEach((doc) => {
+                            doc.ref.update({
+                                phone: newphone
+                            })
+                        })
+                    }
+                alert('Thông tin của bạn đã được cập nhật');
+                getuserdata();
+                setEdit(false);
+                setPhoneedit('');
             }
-            if (newaddress !== '') {
-                doc.forEach((doc) => {
-                    doc.ref.update({
-                        address: newaddress
-                    })
-                })
+            else {
+                console.log('no user data');
             }
-            alert('your user data is updated');
-            getuserdata();
-            setEdit(false);
-            setPasswordedit(false);
-        }
-        else {
-            console.log('no user data');
         }
     }
 
@@ -117,21 +125,23 @@ const Userprofile = ({ navigation }) => {
                             password: newpassword
                         })
                     })
-                    alert('your password is updated');
+                    alert('Đã cập nhật mật khẩu');
                 }
-            }).catch((error) => { alert('Server Issue'); });
-        }).catch((error) => { alert('Wrong Password'); });
+            }).catch((error) => { alert('Đã xảy ra lỗi'); });
+        }).catch((error) => { 
+            Alert.alert('Sai mật khẩu','Mật khẩu của bạn đã sai hoặc để trống',[{text: 'OK',},]);
+         });
     }
 
 
     const logoutuser = () => {
         firebase.auth().signOut().then(() => {
             // Sign-out successful.
-            alert('you are logged out');
+            Alert.alert('','Bạn đã đăng xuất');
             navigation.navigate('login');
         }).catch((error) => {
             // An error happened.
-            alert('Server Issue');
+            alert('Đã xảy ra lỗi');
         });
     }
 
@@ -151,7 +161,7 @@ const Userprofile = ({ navigation }) => {
             </TouchableOpacity>
             
             {edit == false && Passwordedit == false && <View style={styles.container}>
-                <Text style={styles.head1}>Your Profile</Text>
+                <Text style={styles.head1}>Thông tin của bạn</Text>
                 <View>
                 {userdata && userdata.userImgUrl!="" ?
                 <TouchableOpacity onPress={changeavatar}>
@@ -184,7 +194,7 @@ const Userprofile = ({ navigation }) => {
                 </TouchableOpacity>}
                 </View>
                 <View style={styles.containerin}>
-                    <Text style={styles.head2}>Name: {userdata ? <Text style={styles.head2in}>
+                    <Text style={styles.head2}>Tên: {userdata ? <Text style={styles.head2in}>
                         {userdata.name}
                     </Text> : 'loading'}</Text>
 
@@ -192,20 +202,21 @@ const Userprofile = ({ navigation }) => {
                         {userdata.email}
                     </Text> : 'loading'}</Text>
 
-                    <Text style={styles.head2}>Phone: {userdata ? <Text style={styles.head2in}>
+                    <Text style={styles.head2}>Số điện thoại: {userdata ? <Text style={styles.head2in}>
                         {userdata.phone}
                     </Text> : 'loading'}</Text>
-
+                    {/** 
                     <Text style={styles.head2}>Address: {userdata ? <Text style={styles.head2in}>
                         {userdata.address}
                     </Text> : 'loading'}</Text>
+                    */}
                 </View>
                 <TouchableOpacity onPress={() => {
                     setEdit(!edit)
-                    setPasswordedit(false)
+                    setPhoneedit('')
                 }}>
                     <View style={btn2}>
-                        <Text style={styles.btntxt}>Edit Details</Text>
+                        <Text style={styles.btntxt}>Chỉnh sửa</Text>
                     </View>
                 </TouchableOpacity>
 
@@ -215,21 +226,23 @@ const Userprofile = ({ navigation }) => {
                 }
                 }>
                     <View style={btn2}>
-                        <Text style={styles.btntxt}>Change Password</Text>
+                        <Text style={styles.btntxt}>Đổi mật khẩu</Text>
                     </View>
                 </TouchableOpacity>
             </View>
             }
             {edit == true &&
                 <View style={styles.container}>
-                    <Text style={styles.head1}>Edit Profile</Text>
+                    <Text style={styles.head1}>Chỉnh sửa thông tin cá nhân</Text>
                     <View style={styles.containerin}>
-                        <TextInput style={styles.input} placeholder='Name' onChangeText={(e) => setNewName(e)} />
-                        <TextInput style={styles.input} placeholder='Address' onChangeText={(e) => setNewAddress(e)} />
+                        <TextInput style={styles.input} placeholder='Tên' onChangeText={(e) => setNewName(e)} />
+                        
+                        <TextInput style={styles.input} placeholder='Số điện thoại' onChangeText={(e) => setPhoneedit(e)} />
+                        
                     </View>
                     <TouchableOpacity onPress={() => updateuser()}>
                         <View style={btn2}>
-                            <Text style={styles.btntxt}>Submit</Text>
+                            <Text style={styles.btntxt}>Xác nhận</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -237,14 +250,14 @@ const Userprofile = ({ navigation }) => {
 
             {Passwordedit == true &&
                 <View style={styles.container}>
-                    <Text style={styles.head1}>Change your Password</Text>
+                    <Text style={styles.head1}>Đổi mật khẩu</Text>
                     <View style={styles.containerin}>
-                        <TextInput style={styles.input} placeholder='Old Password' onChangeText={(e) => setOldPassword(e)} />
-                        <TextInput style={styles.input} placeholder='New Password' onChangeText={(e) => setNewPassword(e)} />
+                        <TextInput style={styles.input} placeholder='Mật khẩu cũ' onChangeText={(e) => setOldPassword(e)} />
+                        <TextInput style={styles.input} placeholder='Mật khẩu mới' onChangeText={(e) => setNewPassword(e)} />
                     </View>
                     <TouchableOpacity onPress={() => updatepassword()}>
                         <View style={btn2}>
-                            <Text style={styles.btntxt}>Submit</Text>
+                            <Text style={styles.btntxt}>Xác nhận</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -252,7 +265,7 @@ const Userprofile = ({ navigation }) => {
             {Passwordedit == false && edit == false &&
             <TouchableOpacity onPress={logoutuser}>
                     <View style={btn2}>
-                        <Text style={styles.btntxt}>Logout</Text>
+                        <Text style={styles.btntxt}>Đăng xuất</Text>
                     </View>
                 </TouchableOpacity>
             }
@@ -289,6 +302,7 @@ const styles = StyleSheet.create({
         fontWeight: '200',
         marginVertical: 20,
         color: colors.text1,
+        textAlign: 'center',
     },
     containerin: {
         width: '90%',

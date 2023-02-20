@@ -63,7 +63,7 @@ const UserCart = ({ navigation }) => {
     const placeorderofcart = () =>{
         if(cartdata == null || JSON.parse(cartdata).cart.length == 0)
         {
-            Alert.alert('Empty cart', 'Your cart is empty at the momment', [
+            Alert.alert('Đơn hàng trống', 'Đơn hàng của bạn hiện đang trống', [
                 {
                   text: 'OK',
                 },
@@ -71,7 +71,7 @@ const UserCart = ({ navigation }) => {
         }
         else
         {
-            Alert.alert('Order Success', 'Your order has been received', [
+            Alert.alert('Đặt thành công', 'Đơn của bạn đã được gửi đi', [
                 {
                   text: 'OK',
                 },
@@ -103,7 +103,7 @@ const UserCart = ({ navigation }) => {
                 <Text style={styles.head1}>Đơn của bạn</Text>
                 <View style={styles.cartout}>
                     {cartdata == null || JSON.parse(cartdata).cart.length == 0 ?
-                        <Text style={styles.head2}>Bạn chưa thêm nước vào đơn</Text>
+                        <Text style={styles.head2}>Đơn của bạn {'\n'} hiện đang trống</Text>
                         :
 
                         <ScrollView horizontal={true} style={{ width: "100%", borderColor: 'black', borderWidth:1 }}>
@@ -135,7 +135,7 @@ const UserCart = ({ navigation }) => {
                 </View>
                 <View style={styles.btncont}>
                     <View style={styles.c3}>
-                        <Text style={styles.txt5}>Total</Text>
+                        <Text style={styles.txt5}>Tổng: </Text>
                         <Text style={styles.txt6}>{formatcurr(totalCost)} đ</Text>
                     </View>
                     <TouchableOpacity style={btn2}>
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         // fontWeight: '200',
         // marginVertical: 20,
-        color: colors.text1,
+        color: colors.cafe_title,
     },
     head2: {
         fontSize: 30,
@@ -180,10 +180,11 @@ const styles = StyleSheet.create({
         elevation: 10,
         backgroundColor: colors.col1,
         width: '90%',
-        height: '50%',
+        height: '60%',
         alignSelf: 'center',
         paddingVertical: '25%',
         borderRadius: 10,
+        color: '#D3D3D3',
     },
     cartcard: {
         flexDirection: 'row',
@@ -222,7 +223,7 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     btntxt: {
-        backgroundColor: colors.text1,
+        backgroundColor: colors.cafe_title,
         color: colors.col1,
         paddingHorizontal: 10,
         paddingVertical: 5,

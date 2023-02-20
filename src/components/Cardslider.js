@@ -41,7 +41,7 @@ const Cardslider = ({ title, data, navigation }) => {
                             </View>
                             <View style={styles.s3}>
                                 <Text style={styles.buybtn}>
-                                    Buy
+                                    Mua
                                 </Text>
                             </View>
                         </View>
@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
         fontWeight: '300',
         borderRadius: 10,
         marginHorizontal: 10,
+        fontWeight: '700',
     },
     cardsout: {
         width: '100%',

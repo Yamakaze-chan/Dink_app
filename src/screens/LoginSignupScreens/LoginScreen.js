@@ -49,11 +49,11 @@ const LoginScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             {/* <Statusbar /> */}
-            <Text style={styles.head1}>Sign In</Text>
+            <Text style={styles.head1}>Đăng nhập</Text>
             {customerror !== '' && <Text style={styles.errormsg}>{customerror}</Text>}
             <View style={styles.inputout}>
                 <AntDesign name="user" size={24} color={emailfocus === true ? colors.text1 : colors.text2} />
-                <TextInput style={styles.input} placeholder="Email" onFocus={() => {
+                <TextInput style={styles.input} placeholder="Tài khoản" onFocus={() => {
                     setEmailfocus(true)
                     setPasswordfocus(false)
                     setShowpassword(false)
@@ -64,7 +64,7 @@ const LoginScreen = ({ navigation }) => {
             </View>
             <View style={styles.inputout}>
                 <MaterialCommunityIcons name="lock-outline" size={24} color={passwordfocus == true ? colors.text1 : colors.text2} />
-                <TextInput style={styles.input} placeholder="Password" onFocus={() => {
+                <TextInput style={styles.input} placeholder="Mật khẩu" onFocus={() => {
                     setEmailfocus(false)
                     setPasswordfocus(true)
                     setcustomError('')
@@ -77,13 +77,13 @@ const LoginScreen = ({ navigation }) => {
                 <Octicons name={showpassword == false ? "eye-closed" : "eye"} size={24} color="black" onPress={() => setShowpassword(!showpassword)} />
             </View>
             <TouchableOpacity style={btn1} onPress={() => handlelogin()}>
-                <Text style={{ color: colors.col1, fontSize: titles.btntxt, fontWeight: "bold" }}>Sign in</Text>
+                <Text style={{ color: colors.col1, fontSize: titles.btntxt, fontWeight: "bold" }}>Đăng nhập</Text>
             </TouchableOpacity>
 
 
-            <Text style={styles.forgot}>Forgot Password?</Text>
-            <Text style={styles.or}>OR</Text>
-            <Text style={styles.gftxt}>Sign In With </Text>
+            <Text style={styles.forgot}>Quên mật khẩu?</Text>
+            <Text style={styles.or}>Hoặc</Text>
+            <Text style={styles.gftxt}>Đăng nhập với</Text>
 
 
             <View style={styles.gf}>
@@ -99,8 +99,8 @@ const LoginScreen = ({ navigation }) => {
                 </TouchableOpacity>
             </View>
             <View style={hr80}></View>
-            <Text >Don't have an account?
-                <Text style={styles.signup} onPress={() => navigation.navigate('signup')}> Sign Up</Text>
+            <Text >Bạn chưa có tài khoản?
+                <Text style={styles.signup} onPress={() => navigation.navigate('signup')}> Đăng ký</Text>
             </Text>
         </View>
     )

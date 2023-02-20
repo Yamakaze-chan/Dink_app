@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView, TextInput } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView, TextInput, Alert } from 'react-native'
 import React, { useState } from 'react'
 import { btn1, btn2, colors, hr80, navbtn, navbtnin, navbtnout, nonveg, veg } from '../globals/style';
 import { AntDesign } from '@expo/vector-icons';
@@ -35,7 +35,7 @@ const Productpage = ({ navigation, route }) => {
                 })
                 console.log('Added')
             }
-            alert('Đã thêm vào đơn')
+            Alert.alert('Thêm thành công','Đã thêm vào đơn hàng')
         })
 
     }
@@ -148,7 +148,7 @@ const Productpage = ({ navigation, route }) => {
                         {/* <View style={hr80}></View> */}
 
                         <View style={styles.c4in}>
-                            <Text style={styles.txt2}>Total Price</Text>
+                            <Text style={styles.txt2}>Tổng số tiền</Text>
                                 <Text style={styles.txt3}>{
                                     formatcurr((parseInt(data.foodPrice) * parseInt(quantity))).toString()
                                 } đ</Text>
@@ -262,7 +262,7 @@ const styles = StyleSheet.create({
         marginLeft: 10,
     },
     btntxt: {
-        backgroundColor: colors.text1,
+        backgroundColor: colors.cafe_title,
         color: colors.col1,
         paddingHorizontal: 10,
         paddingVertical: 5,
