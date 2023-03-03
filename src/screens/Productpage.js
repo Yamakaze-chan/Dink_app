@@ -37,29 +37,42 @@ const Productpage = ({ navigation, route }) => {
   }
 
   const addTocart = () => {
-    const docRef = firebase
-      .firestore()
-      .collection("UserCart")
-      .doc(firebase.auth().currentUser.uid);
+    if(firebase.auth().currentUser.uid == "y5F8yXDGhjdJDf1PIDbAHesyYqs2")
+    {
+            Alert.alert("","You have to log in to use this feature",[
+                {
+                    text:'Login now',
+                    onPress: () => navigation.navigate('login')
+                },
+                {
+                    text: 'Maybe later',
+                    onPress: () => navigation.goBack(),
+                }
+            ])
+    }
+    else
+    {
+    const docRef = firebase.firestore().collection('UserCart').doc(firebase.auth().currentUser.uid);
 
-    const data1 = { data, Foodquantity: quantity };
+    const data1 = { data, Foodquantity: quantity }
     console.log(data1);
 
     docRef.get().then((doc) => {
-      if (doc.exists) {
-        docRef.update({
-          cart: firebase.firestore.FieldValue.arrayUnion(data1),
-        });
-        console.log("Updated");
-      } else {
-        docRef.set({
-          cart: [data1],
-        });
-        console.log("Added");
-      }
-      Alert.alert("Thêm thành công", "Đã thêm vào đơn hàng");
-    });
-  };
+        if (doc.exists) {
+            docRef.update({
+                cart: firebase.firestore.FieldValue.arrayUnion(data1)
+            })
+            console.log('Updated')
+        } else {
+            docRef.set({
+                cart: [data1]
+            })
+            console.log('Added')
+        }
+        Alert.alert('Thêm thành công','Đã thêm vào đơn hàng')
+    })
+    }
+}
 
   const increaseQuantity = () => {
     setquantity((parseInt(quantity) + 1).toString());

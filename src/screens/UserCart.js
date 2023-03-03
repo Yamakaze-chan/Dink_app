@@ -19,20 +19,33 @@ const UserCart = ({ navigation }) => {
   const [totalCost, setTotalCost] = useState("0");
 
   const getcartdata = async () => {
-    const docRef = firebase
-      .firestore()
-      .collection("UserCart")
-      .doc(firebase.auth().currentUser.uid);
-
-    docRef.get().then((doc) => {
-      if (doc.exists) {
-        const data = JSON.stringify(doc.data());
-        setCartdata(data);
-      } else {
-        console.log("No such document!");
-      }
-    });
-  };
+    if(firebase.auth().currentUser.uid == "y5F8yXDGhjdJDf1PIDbAHesyYqs2")
+    {
+            Alert.alert("","You have to log in to use this feature",[
+                {
+                    text:'Login now',
+                    onPress: () => navigation.navigate('login')
+                },
+                {
+                    text: 'Maybe later',
+                    onPress: () => navigation.goBack(),
+                }
+            ])
+    }
+    else
+    {
+        const docRef = firebase.firestore().collection('UserCart').doc(firebase.auth().currentUser.uid);
+        console.log(firebase.auth().currentUser.uid);
+        docRef.get().then((doc) => {
+            if (doc.exists) {
+                const data = JSON.stringify(doc.data());
+                setCartdata(data)
+            } else {
+                console.log('No such document!');
+            }
+        })
+    }
+}
 
   useEffect(() => {
     getcartdata();

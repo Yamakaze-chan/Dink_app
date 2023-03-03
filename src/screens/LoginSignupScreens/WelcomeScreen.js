@@ -33,6 +33,21 @@ const WelcomeScreen = ({ navigation }) => {
             console.log(error);
         });
     }
+
+    const logginasguest = () => {
+        firebase.auth().signInWithEmailAndPassword('guest@gmail.com','guest123').then((userCredential) => {
+            firebase.auth().onAuthStateChanged((user) => {
+                // console.log(user);
+                if (user) {
+                    // navigation.navigate('home');
+                    setUserlogged(user);
+                } else {
+                    // No user is signed in.
+                    console.log('no user1');
+                }
+            });
+    })
+    }
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Welcome to</Text>
@@ -46,18 +61,29 @@ const WelcomeScreen = ({ navigation }) => {
 
             {userlogged === null ?
 
-                <View style={styles.btnout}>
-                    <TouchableOpacity onPress={() => navigation.navigate('signup')}>
-                        <Text style={styles.btn}>Sign up</Text>
+                <View style={styles.btnoutout}>
+                <View style = {styles.btnout}>
+                <TouchableOpacity onPress={() => navigation.navigate('signup')}>
+                    <Text style={styles.btn}>Sign up</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('login')}>
+                    <Text style={styles.btn}>Log In</Text>
+                </TouchableOpacity>
+                </View>
+                <View style = {{justifyContent:'center', alignContent:'center',alignItems:'center'}}>
+                    <TouchableOpacity onPress={() => logginasguest()}>
+                        <Text style = {{color: colors.cafe_title, fontSize: 16, textDecorationLine: 'underline'}}> Log in as Guest</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => navigation.navigate('login')}>
-                        <Text style={styles.btn}>Log In</Text>
-                    </TouchableOpacity>
+                </View>
                 </View>
 
                 :
                 <View style={styles.logged}>
+                    {userlogged.email == "guest@gmail.com" ?
+                    <Text style={styles.txtlog}>Signed in as Guest</Text>
+                    :
                     <Text style={styles.txtlog}>Signed in as <Text style={styles.txtlogin}>{userlogged.email}</Text></Text>
+                    }
                     <View style={styles.btnout}>
                         <TouchableOpacity onPress={() => navigation.navigate('home')}>
                             <Text style={styles.btn}>Next</Text>
@@ -65,8 +91,8 @@ const WelcomeScreen = ({ navigation }) => {
                         <TouchableOpacity onPress={() => handlelogout()}>
                             <Text style={styles.btn}>Log Out</Text>
                         </TouchableOpacity>
-
                     </View>
+                    
                 </View>
             }
         </View>

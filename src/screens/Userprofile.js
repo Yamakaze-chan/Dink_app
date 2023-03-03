@@ -44,21 +44,36 @@ const Userprofile = ({ navigation }) => {
   // console.log(userloggeduid);
 
   const getuserdata = async () => {
-    const docRef = firebase
-      .firestore()
-      .collection("UserData")
-      .where("uid", "==", userloggeduid);
-    const doc = await docRef.get();
-    //console.log(doc);
-    if (!doc.empty) {
-      doc.forEach((doc) => {
-        setUserdata(doc.data());
-        console.log(doc.data());
-      });
-    } else {
-      console.log("no user data");
+    console.log(userloggeduid);
+    if(userloggeduid == "y5F8yXDGhjdJDf1PIDbAHesyYqs2")
+    {
+            Alert.alert("","You have to log in to use this feature",[
+                {
+                    text:'Login now',
+                    onPress: () => navigation.navigate('login')
+                },
+                {
+                    text: 'Maybe later',
+                    onPress: () => navigation.goBack(),
+                }
+            ])
     }
-  };
+    else
+    {
+        const docRef = firebase.firestore().collection('UserData').where('uid', '==', userloggeduid)
+        const doc = await docRef.get();
+        //console.log(doc);
+        if (!doc.empty) {
+            doc.forEach((doc) => {
+                setUserdata(doc.data());
+                console.log(doc.data())
+            })
+        }
+        else {
+            console.log('no user data');
+        }
+    }
+}
 
   useEffect(() => {
     getuserdata();

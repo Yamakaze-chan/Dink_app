@@ -6,6 +6,7 @@ import {
   FlatList,
   ScrollView,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 
 import React, { useEffect, useState } from "react";
@@ -19,15 +20,27 @@ const TrackOrders = ({ navigation }) => {
   const [orders, setOrders] = useState([]);
 
   const getorders = async () => {
-    const ordersRef = firebase
-      .firestore()
-      .collection("UserOrders")
-      .where("orderuseruid", "==", firebase.auth().currentUser.uid);
-    ordersRef.onSnapshot((snapshot) => {
-      setOrders(snapshot.docs.map((doc) => doc.data()));
-    });
-  };
-
+    if(firebase.auth().currentUser.uid == "y5F8yXDGhjdJDf1PIDbAHesyYqs2")
+    {
+            Alert.alert("","You have to log in to use this feature",[
+                {
+                    text:'Login now',
+                    onPress: () => navigation.navigate('login')
+                },
+                {
+                    text: 'Maybe later',
+                    onPress: () => navigation.goBack(),
+                }
+            ])
+    }
+    else
+    {
+    const ordersRef = firebase.firestore().collection('UserOrders').where('orderuseruid', '==', firebase.auth().currentUser.uid);
+    ordersRef.onSnapshot(snapshot => {
+        setOrders(snapshot.docs.map(doc => doc.data()))
+    })
+    }
+}
   useEffect(() => {
     getorders();
   }, []);
