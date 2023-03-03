@@ -37,21 +37,6 @@ const Productpage = ({ navigation, route }) => {
   }
 
   const addTocart = () => {
-    if(firebase.auth().currentUser.uid == "y5F8yXDGhjdJDf1PIDbAHesyYqs2")
-    {
-            Alert.alert("","You have to log in to use this feature",[
-                {
-                    text:'Login now',
-                    onPress: () => navigation.navigate('login')
-                },
-                {
-                    text: 'Maybe later',
-                    onPress: () => navigation.goBack(),
-                }
-            ])
-    }
-    else
-    {
     const docRef = firebase.firestore().collection('UserCart').doc(firebase.auth().currentUser.uid);
 
     const data1 = { data, Foodquantity: quantity }
@@ -71,7 +56,6 @@ const Productpage = ({ navigation, route }) => {
         }
         Alert.alert('Thêm thành công','Đã thêm vào đơn hàng')
     })
-    }
 }
 
   const increaseQuantity = () => {

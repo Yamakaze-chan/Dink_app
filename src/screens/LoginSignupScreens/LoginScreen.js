@@ -42,12 +42,6 @@ const LoginScreen = ({ navigation }) => {
             })
     }
 
-    const logginasguest = () => {
-        firebase.auth().signInWithEmailAndPassword('guest@gmail.com','guest123').then((userCredential) => {
-            navigation.navigate('welcomepage');
-    })
-    }
-
 
 
     return (
@@ -84,7 +78,7 @@ const LoginScreen = ({ navigation }) => {
                 <Text style={{ color: colors.col1, fontSize: titles.btntxt, fontWeight: "bold" }}>Đăng nhập</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => logginasguest()}>
+            <TouchableOpacity onPress={() => navigation.navigate('anonymous')}>
                 <Text style={{ color: colors.cafe_title, fontSize: 16, fontWeight: "bold" }}>Login as Guest</Text>
             </TouchableOpacity>
 

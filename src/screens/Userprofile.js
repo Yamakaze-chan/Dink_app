@@ -21,6 +21,7 @@ import AlertAsync from "react-native-alert-async";
 
 const Userprofile = ({ navigation }) => {
   const [userloggeduid, setUserloggeduid] = useState(null);
+  const [user, setUser] = useState(null);
   const [userdata, setUserdata] = useState(null);
   const [avaimage, setAvaimage] = useState(null);
   let id_of_UserData;
@@ -29,6 +30,7 @@ const Userprofile = ({ navigation }) => {
       firebase.auth().onAuthStateChanged((user) => {
         // console.log(user);
         if (user) {
+          setUserdata(user);
           // navigation.navigate('home');
           setUserloggeduid(user.uid);
           //console.log(doc.id, " => ", doc.data());
@@ -180,7 +182,13 @@ const Userprofile = ({ navigation }) => {
       });
   };
   const logoutuser = () => {
-    firebase
+    if(user == null)
+    {
+      navigation.navigate("login");
+    }
+    else
+    {
+      firebase
       .auth()
       .signOut()
       .then(() => {
@@ -192,6 +200,8 @@ const Userprofile = ({ navigation }) => {
         // An error happened.
         alert("Lỗi server");
       });
+    }
+    
   };
 
   const changeavatar = () => {

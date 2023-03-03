@@ -15,6 +15,7 @@ import UserCart from "./src/screens/UserCart";
 import Placeorder from "./src/screens/Placeorder";
 import TrackOrders from "./src/screens/TrackOrders";
 import SetAvatarScreen from "./src/screens/SetavatarScreen";
+import Anonymous from "./src/screens/LoginSignupScreens/Anonymous";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -97,6 +98,14 @@ export default function App() {
         <Stack.Screen
           name="updateavatar"
           component={SetAvatarScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+
+        <Stack.Screen
+          name="anonymous"
+          component={Anonymous}
           options={{
             headerShown: false,
           }}

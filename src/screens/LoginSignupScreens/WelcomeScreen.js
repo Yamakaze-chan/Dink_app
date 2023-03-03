@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import logo from '../../../assets/coffee_logo.png';
 import { colors, hr80 } from '../../globals/style';
 import { firebase } from '../../../Firebase/firebaseConfig'
+import { getAuth, signInAnonymously } from "firebase/auth";
 
 const WelcomeScreen = ({ navigation }) => {
     const [userlogged, setUserlogged] = useState(null);
@@ -35,11 +36,28 @@ const WelcomeScreen = ({ navigation }) => {
     }
 
     const logginasguest = () => {
+        navigation.navigate('anonymous')
+        /** 
+        try
+        {
+            firebase.auth().signInAnonymously().then(()=>{
+                firebase.auth().onAuthStateChanged((user) => {
+                setUserlogged(user)
+                console.log(user)
+                })
+            })
+        }
+        catch(e)
+        {
+            console.log(e)
+        }
+        
         firebase.auth().signInWithEmailAndPassword('guest@gmail.com','guest123').then((userCredential) => {
             firebase.auth().onAuthStateChanged((user) => {
                 // console.log(user);
                 if (user) {
                     // navigation.navigate('home');
+                    console.log(user);
                     setUserlogged(user);
                 } else {
                     // No user is signed in.
@@ -47,6 +65,7 @@ const WelcomeScreen = ({ navigation }) => {
                 }
             });
     })
+    */
     }
     return (
         <View style={styles.container}>
@@ -79,7 +98,7 @@ const WelcomeScreen = ({ navigation }) => {
 
                 :
                 <View style={styles.logged}>
-                    {userlogged.email == "guest@gmail.com" ?
+                    {userlogged.isAnonymous ?
                     <Text style={styles.txtlog}>Signed in as Guest</Text>
                     :
                     <Text style={styles.txtlog}>Signed in as <Text style={styles.txtlogin}>{userlogged.email}</Text></Text>
