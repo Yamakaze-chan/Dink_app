@@ -89,7 +89,11 @@ const HomeScreen = ({ navigation }) => {
             />
           </View>
           {search != "" && ( //<View style={styles.seacrhresultsouter}>
-            <ScrollView horizontal={true} style={{ width: "100%" }}>
+            <ScrollView
+              horizontal={true}
+              style={{ width: "100%" }}
+              isUserInteractionEnabled={true}
+            >
               <FlatList
                 style={styles.searchresultsinner}
                 data={foodData}
@@ -125,6 +129,7 @@ const HomeScreen = ({ navigation }) => {
                   }
                 }}
               />
+
               {/* </View>} */}
             </ScrollView>
           )}
@@ -192,6 +197,17 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 5,
   },
+  buybtn: {
+    margin: 10,
+    backgroundColor: "#006400",
+    color: colors.col1,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    fontSize: 20,
+    borderRadius: 10,
+    width: "90%",
+    textAlign: "center",
+  },
   txt1: {
     fontSize: 16,
     color: colors.text1,
@@ -253,9 +269,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
     position: "absolute",
     bottom: 0,
-    width: "100%",
     backgroundColor: colors.col1,
     zIndex: 20,
+    flex: 1,
+    left: 0,
+    right: 0,
   },
 });
 export default HomeScreen;

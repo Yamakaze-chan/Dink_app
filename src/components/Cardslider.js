@@ -5,24 +5,24 @@ import {
   View,
   Image,
   TouchableOpacity,
+  Alert,
 } from "react-native";
-import React, { useState } from "react";
 import { colors, veg, nonveg } from "../globals/style";
 import { firebase } from "../../Firebase/firebaseConfig";
-
-const Cardslider = ({ title, data, navigation }) => {
+import React, { useState } from "react";
+const Cardslider = ({ title, navigation, data }) => {
   const [ischecked, setischecked] = useState(false);
   const [quantity, setquantity] = useState("1");
   const [addonquantity, setaddonquantity] = useState("0");
 
-  const addTocart = () => {
+  const addTocart = (item) => {
     const docRef = firebase
       .firestore()
       .collection("UserCart")
       .doc(firebase.auth().currentUser.uid);
 
     const data1 = {
-      data,
+      data: item,
       Addonquantity: addonquantity,
       Foodquantity: quantity,
     };
@@ -40,17 +40,12 @@ const Cardslider = ({ title, data, navigation }) => {
         });
         console.log("Added");
       }
-      alert("Added to cart");
+      Alert.alert("Thành công", "Đã thêm vào giỏ hàng");
     });
   };
 
   const increaseQuantity = () => {
     setquantity((parseInt(quantity) + 1).toString());
-  };
-  const decreaseQuantity = () => {
-    if (parseInt(quantity) > 1) {
-      setquantity((parseInt(quantity) - 1).toString());
-    }
   };
 
   const increaseAddonQuantity = () => {
@@ -70,7 +65,6 @@ const Cardslider = ({ title, data, navigation }) => {
     // console.log('clicked ', item)
     navigation.navigate("productpage", item);
   };
-
   const formatcurr = (n) => {
     return String(n.toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, "$1,")).slice(
       0,
@@ -103,21 +97,23 @@ const Cardslider = ({ title, data, navigation }) => {
               </View>
               <View style={styles.s2}>
                 <Text style={styles.txt1}>{item.foodName}</Text>
-
-                <View style={styles.s2in}>
-                  <Text style={styles.txt2}>
-                    {formatcurr(parseInt(item.foodPrice))} VNĐ
-                  </Text>
-                </View>
-                <TouchableOpacity
-                  style={styles.s3}
-                  onPress={() => {
-                    addTocart();
-                  }}
-                >
-                  <Text style={styles.buybtn}>Add to Cart</Text>
-                </TouchableOpacity>
               </View>
+              <View style={styles.s2in}>
+                <Text style={styles.txt2}>
+                  {formatcurr(parseInt(item.foodPrice))} VNĐ
+                </Text>
+                {/*
+                                    {item.foodType == 'veg' ? <Text style={veg}></Text> : <Text style={nonveg}></Text>}
+                                    */}
+              </View>
+              <TouchableOpacity
+                style={styles.s3}
+                onPress={() => {
+                  addTocart(item);
+                }}
+              >
+                <Text style={styles.buybtn}>Thêm vào đơn</Text>
+              </TouchableOpacity>
             </View>
           </TouchableOpacity>
         )}
@@ -134,13 +130,13 @@ const styles = StyleSheet.create({
   },
   //card
   cardouthead: {
+    backgroundColor: "#FFE4B5",
     color: colors.text3,
-    width: "90%",
+    width: "30%",
     fontSize: 30,
     fontWeight: "300",
     borderRadius: 10,
-    marginHorizontal: 10,
-    fontWeight: "700",
+    paddingHorizontal: 10,
   },
   cardsout: {
     width: "100%",
@@ -170,18 +166,18 @@ const styles = StyleSheet.create({
   txt1: {
     fontSize: 18,
     color: colors.text3,
-    marginHorizontal: 5,
-    width: 150,
+    marginHorizontal: 10,
+    marginBottom: 5,
+    width: 250,
   },
   txt2: {
-    fontSize: 20,
+    fontSize: 18,
     color: colors.text2,
-    marginRight: 10,
   },
   s2in: {
     flexDirection: "row",
-    alignItems: "center",
     marginHorizontal: 10,
+    marginBottom: 10,
   },
   s3: {
     alignItems: "center",
@@ -190,9 +186,10 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   buybtn: {
-    backgroundColor: colors.text1,
+    margin: 10,
+    backgroundColor: "#006400",
     color: colors.col1,
-    paddingHorizontal: 10,
+    paddingHorizontal: 5,
     paddingVertical: 5,
     fontSize: 20,
     borderRadius: 10,
