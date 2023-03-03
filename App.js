@@ -1,20 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
+//testttt
 
-
-import React, {useState} from 'react'
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import WelcomeScreen from './src/screens/LoginSignupScreens/WelcomeScreen';
-import SignupScreen from './src/screens/LoginSignupScreens/SignupScreen';
-import LoginScreen from './src/screens/LoginSignupScreens/LoginScreen';
-import HomeScreen from './src/screens/HomeScreen';
-import Userprofile from './src/screens/Userprofile';
-import Productpage from './src/screens/Productpage';
-import UserCart from './src/screens/UserCart';
-import Placeorder from './src/screens/Placeorder';
-import TrackOrders from './src/screens/TrackOrders';
-import SetAvatarScreen from './src/screens/SetavatarScreen'
+import React, { useState } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import WelcomeScreen from "./src/screens/LoginSignupScreens/WelcomeScreen";
+import SignupScreen from "./src/screens/LoginSignupScreens/SignupScreen";
+import LoginScreen from "./src/screens/LoginSignupScreens/LoginScreen";
+import HomeScreen from "./src/screens/HomeScreen";
+import Userprofile from "./src/screens/Userprofile";
+import Productpage from "./src/screens/Productpage";
+import UserCart from "./src/screens/UserCart";
+import Placeorder from "./src/screens/Placeorder";
+import TrackOrders from "./src/screens/TrackOrders";
+import SetAvatarScreen from "./src/screens/SetavatarScreen";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -22,91 +22,102 @@ export default function App() {
   //{
   //  alert("No internet connection");
   //}
-    return(
-      <NavigationContainer>
-      <Stack.Navigator initialRouteName='welcomepage'>
-        <Stack.Screen name="welcomepage" component={WelcomeScreen}
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="welcomepage">
+        <Stack.Screen
+          name="welcomepage"
+          component={WelcomeScreen}
           options={{
             headerShown: false,
           }}
         />
-        <Stack.Screen name="signup" component={SignupScreen}
-          options={{
-            headerShown: false,
-
-          }}
-        />
-        <Stack.Screen name="login" component={LoginScreen}
-          options={{
-            headerShown: false,
-
-          }}
-        />
-
-        <Stack.Screen name="home" component={HomeScreen}
+        <Stack.Screen
+          name="signup"
+          component={SignupScreen}
           options={{
             headerShown: false,
           }}
         />
-        <Stack.Screen name="userprofile" component={Userprofile}
+        <Stack.Screen
+          name="login"
+          component={LoginScreen}
           options={{
             headerShown: false,
           }}
         />
 
-        <Stack.Screen name="productpage" component={Productpage}
+        <Stack.Screen
+          name="home"
+          component={HomeScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="userprofile"
+          component={Userprofile}
           options={{
             headerShown: false,
           }}
         />
 
-        <Stack.Screen name="cart" component={UserCart}
+        <Stack.Screen
+          name="productpage"
+          component={Productpage}
           options={{
             headerShown: false,
           }}
         />
 
-        <Stack.Screen name="placeorder" component={Placeorder}
+        <Stack.Screen
+          name="cart"
+          component={UserCart}
           options={{
             headerShown: false,
           }}
         />
 
-        <Stack.Screen name="trackorders" component={TrackOrders}
+        <Stack.Screen
+          name="placeorder"
+          component={Placeorder}
           options={{
             headerShown: false,
           }}
         />
 
-          <Stack.Screen name="updateavatar" component={SetAvatarScreen}
+        <Stack.Screen
+          name="trackorders"
+          component={TrackOrders}
+          options={{
+            headerShown: false,
+          }}
+        />
+
+        <Stack.Screen
+          name="updateavatar"
+          component={SetAvatarScreen}
           options={{
             headerShown: false,
           }}
         />
       </Stack.Navigator>
-
-      </NavigationContainer>
-    )
-      
+    </NavigationContainer>
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
-
-
-
 
 // Category page
 // cart page
 // add to cart functionality
 // track order page
 // order history page
-// payment gateway 
-
-
+// payment gateway
