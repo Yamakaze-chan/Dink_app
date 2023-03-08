@@ -118,7 +118,7 @@ Trường đại học Công nghệ Thông tin - ĐHQG TPHCM
 </div>
 
 <div class="container text-center">
-  <img src="https://drive.google.com/uc?export=view&id=1G4UA5OncEz1bOWwc8vhup4uXq4tKrOZA" alt="Order history screen" width="30%"/>
+  <img src="https://drive.google.com/uc?export=view&id=15q-hbrIernKv9tuCJnqxv78VTeddyTIn" alt="Order history screen" width="30%"/>
   <h3>Order history screen</h3>
 </div>
 
