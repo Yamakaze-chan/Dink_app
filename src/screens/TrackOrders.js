@@ -119,7 +119,7 @@ const TrackOrders = ({ navigation }) => {
                       </Text>
                     ) : (
                       <Text style={styles.ordertxt2}>
-                        Name: Su Su {"\n"}Contact info: 0901349270
+                        Name: Su Su {"\n"}Contact info: 0123456789
                       </Text>
                     )}
                     {order.deliveryboy_phone ? (
