@@ -43,6 +43,8 @@ Trường đại học Công nghệ Thông tin - ĐHQG TPHCM
       <li>Tìm kiếm nhanh nước</li>
       <li>Thêm vào giỏ hàng / Xóa khỏi giỏ hàng</li>
       <li>Order / Hủy order</li>
+      <li>Xem thông tin đơn hàng</li>
+      <li>Xem lịch sử đơn hàng</li>
     </ul>
   </li>
   <li>Đăng xuất</li>
@@ -50,6 +52,18 @@ Trường đại học Công nghệ Thông tin - ĐHQG TPHCM
 
 <strong>Screens</strong>
 
-<a href="https://drive.google.com/uc?export=view&id=1srpqP5ubVFjbaza4nG5RoGLICq3oktWQ"><img src="https://drive.google.com/uc?export=view&id=1srpqP5ubVFjbaza4nG5RoGLICq3oktWQ" style="width: 200px; max-width: 100%; height: auto" title="Click to enlarge picture" />
+<a href="https://drive.google.com/uc?export=view&id=1lR8Cm3gub1CxMBWl58J_VSNBCrlbVNRx"><img src="https://drive.google.com/uc?export=view&id=1lR8Cm3gub1CxMBWl58J_VSNBCrlbVNRx" style="width: 200px; max-width: 100%; height: auto" title="Click to enlarge picture" />
 
-Màn hình Welcome
+Màn hình Welcome khi vào App
+  
+<a href="https://drive.google.com/uc?export=view&id=1jdTs47CJ88hwi1dyndBU8xxLC6edrsw2"><img src="https://drive.google.com/uc?export=view&id=1jdTs47CJ88hwi1dyndBU8xxLC6edrsw2" style="width: 200px; max-width: 100%; height: auto" title="Click to enlarge picture" />
+
+Màn hình Đăng ký
+
+<a href="https://drive.google.com/uc?export=view&id=1SRSIc4EYqmkxl8tVonFUrbHqPwvQXGZj"><img src="https://drive.google.com/uc?export=view&id=1SRSIc4EYqmkxl8tVonFUrbHqPwvQXGZj" style="width: 200px; max-width: 100%; height: auto" title="Click to enlarge picture" />
+
+Màn hình Đăng nhập bằng username + password
+    
+<a href="https://drive.google.com/uc?export=view&id=1xb5NiZBAlIVT7qN54ZUNVUT8jXB5ORjR"><img src="https://drive.google.com/uc?export=view&id=1xb5NiZBAlIVT7qN54ZUNVUT8jXB5ORjR" style="width: 200px; max-width: 100%; height: auto" title="Click to enlarge picture" />
+
+Màn hình Đăng nhập ẩn danh
