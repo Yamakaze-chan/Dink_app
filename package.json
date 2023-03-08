@@ -15,7 +15,9 @@
     "@react-navigation/native-stack": "^6.8.0",
     "@types/intl": "^1.2.0",
     "expo": "~46.0.9",
+    "expo-device": "~4.3.0",
     "expo-image-picker": "~13.3.1",
+    "expo-notifications": "~0.16.1",
     "expo-status-bar": "~1.4.0",
     "firebase": "^9.6.11",
     "install": "^0.13.0",
@@ -24,10 +26,9 @@
     "react-dom": "18.0.0",
     "react-intl": "^6.2.8",
     "react-native": "0.69.6",
+    "react-native-alert-async": "^1.0.5",
     "react-native-swiper": "^1.6.0",
-    "react-native-web": "~0.18.7",
-    "expo-notifications": "~0.16.1",
-    "expo-device": "~4.3.0"
+    "react-native-web": "~0.18.7"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

@@ -14,18 +14,19 @@ import HomeHeadNav from "../components/HomeHeadNav";
 import BottomNav from "../components/BottomNav";
 import { btn1, btn2, colors } from "../globals/style";
 import { firebase } from "../../Firebase/firebaseConfig";
-import moment from "moment";
 
 const TrackOrders = ({ navigation }) => {
   const [orders, setOrders] = useState([]);
 
   const getorders = async () => {
-
-    const ordersRef = firebase.firestore().collection('UserOrders').where('orderuseruid', '==', firebase.auth().currentUser.uid);
-    ordersRef.onSnapshot(snapshot => {
-        setOrders(snapshot.docs.map(doc => doc.data()))
-    })
-}
+    const ordersRef = firebase
+      .firestore()
+      .collection("UserOrders")
+      .where("orderuseruid", "==", firebase.auth().currentUser.uid);
+    ordersRef.onSnapshot((snapshot) => {
+      setOrders(snapshot.docs.map((doc) => doc.data()));
+    });
+  };
   useEffect(() => {
     getorders();
   }, []);
